@@ -176,7 +176,7 @@ class Main
 with editor:
     code = lit_ace(
         value=INITIAL_CODE,
-        language="Java",
+        language="python",
         placeholder="// Enter code here",
         theme="twilight",
         keybinding="vscode",
@@ -190,15 +190,4 @@ with editor:
     lit.write("*Remember to save your code separately!*")
 
 with executor:
-    with open("Main.java", "w") as file:
-        file.write(code)
-    compile_process = subprocess.Popen(["javac", "Main.java"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    compile_output, compile_error = compile_process.communicate()
-
-    if compile_process.returncode == 0:
-        run_process = subprocess.Popen(["java", "Main"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        run_output, run_error = run_process.communicate()
-
-        lit.code(f"Compile Output:\n{compile_output.decode()}\n\nRun Output:\n{run_output.decode()}")
-    else:
-        lit.code(f"Compile Error:\n{compile_error.decode()}")
+    exec(code)
