@@ -3,4 +3,3 @@ streamlit-ace
 streamlit-metrics
 plotly
 cufflinks
-java==8
